@@ -163,7 +163,7 @@ function district_portal_image_default_styles() {
   );
 
   // Default image preset for Photograph
-  $styles['photo'] = array(
+  $styles['photo_small'] = array(
     'label' => 'Photo (70x70)',
     'effects' => array(
       array(
@@ -171,6 +171,22 @@ function district_portal_image_default_styles() {
         'data' => array(
           'width' => 70,
           'height' => 70,
+          'upscale' => 1,
+        ),
+        'weight' => 0
+      )
+    )
+  );
+
+  // Default image preset for Photograph
+  $styles['photo'] = array(
+    'label' => 'Photo (120x150)',
+    'effects' => array(
+      array(
+        'name' => 'image_scale',
+        'data' => array(
+          'width' => 120,
+          'height' => 150,
           'upscale' => 1,
         ),
         'weight' => 0
