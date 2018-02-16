@@ -5,9 +5,9 @@ core = 7.x
 dependencies[] = sms
 
 
-; Information added by Drupal.org packaging script on 2017-10-11
-version = "7.x-1.1"
+; Information added by Drupal.org packaging script on 2018-01-26
+version = "7.x-1.2"
 core = "7.x"
 project = "sms_simplegateway"
-datestamp = "1507701946"
+datestamp = "1516942388"
 

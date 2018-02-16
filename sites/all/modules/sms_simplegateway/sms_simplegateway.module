@@ -177,7 +177,17 @@ function sms_simplegateway_admin_form($configuration) {
   $form['sms_simplegateway_receive']['sms_simplegateway_recv_url'] = array(
     '#type' => 'item',
     '#title' => 'Target URL for the message receiver',
-    '#value' => url('sms/simplegateway/receiver', array('absolute' => TRUE)),
+    '#markup' => url('sms/simplegateway/receiver', array('absolute' => TRUE)),
+  );
+  $form['sms_simplegateway_receive']['sms_simplegateway_recv_content_type'] = array(
+    '#type' => 'radios',
+    '#title' => t('Content Encoding'),
+    '#description' => t('For POST Requests Only.'),
+    '#default_value' => isset($configuration['sms_simplegateway_recv_content_type']) ? $configuration['sms_simplegateway_recv_content_type'] : NULL,
+    '#options' => array(
+      'plain' => 'Plain',
+      'json' => 'Json',
+    ),
   );
   $form['sms_simplegateway_receive']['sms_simplegateway_recv_number_field'] = array(
     '#type' => 'textfield',
@@ -312,12 +322,24 @@ function sms_simplegateway_receive_message() {
   $gateway = sms_gateways('gateway', 'simplegateway');
   $config = $gateway['configuration'];
 
+  if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    if ($config['sms_simplegateway_recv_content_type'] == 'json') {
+      $data = (array) json_decode(file_get_contents('php://input'));
+    }
+    else {
+      $data = $_POST;
+    }
+  }
+  else {
+    $data = $_GET;
+  }
   sms_incoming(
-    $_REQUEST[$config['sms_simplegateway_recv_number_field']],
-    $_REQUEST[$config['sms_simplegateway_recv_message_field']],
+    $data[$config['sms_simplegateway_recv_number_field']],
+    $data[$config['sms_simplegateway_recv_message_field']],
     array(
       'gateway_params' => array(),
-      'receiver' => $_REQUEST[$config['sms_simplegateway_recv_gwnumber_field']],
+      'receiver' => $data[$config['sms_simplegateway_recv_gwnumber_field']],
     )
   );
+  drupal_exit();
 }
