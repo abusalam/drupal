@@ -22,8 +22,8 @@ $handler->display->display_options['pager']['options']['items_per_page'] = '5';
 $handler->display->display_options['style_plugin'] = 'default';
 $handler->display->display_options['row_plugin'] = 'fields';
 $handler->display->display_options['row_options']['inline'] = array(
-  'field_full_name' => 'field_full_name',
-  'name' => 'name',
+'field_full_name' => 'field_full_name',
+'name' => 'name',
 );
 $handler->display->display_options['row_options']['hide_empty'] = TRUE;
 /* Relationship: Content: Author */
@@ -97,3 +97,19 @@ $handler->display->display_options['filters']['status']['expose']['operator'] = 
 
 /* Display: Block */
 $handler = $view->new_display('block', 'Block', 'block');
+$translatables['about_author'] = array(
+t('Master'),
+t('About Author'),
+t('more'),
+t('Apply'),
+t('Reset'),
+t('Sort by'),
+t('Asc'),
+t('Desc'),
+t('author'),
+t('([name])'),
+t('Contact Author'),
+t('Last access'),
+t('All'),
+t('Block'),
+);
