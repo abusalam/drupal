@@ -76,7 +76,7 @@
     </script>
     <noscript>
       <meta http-equiv="refresh"
-            content="0;url=http://www.enable-javascript.com/">
+            content="0;url=https://www.enable-javascript.com/">
     </noscript>
   <?php endif; ?>
 </head>
