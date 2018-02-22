@@ -29,33 +29,28 @@
 
   <div class="thumbnail card-portrait center-block clearfix">
     <?php if ($include_map): ?>
-      <iframe width="<?php print $width; ?>" height="<?php print $height; ?>"
-              frameborder="0" scrolling="no" marginheight="0" marginwidth="0"
-              src="https://maps.google.com/maps?hl=<?php print $langcode; ?>&amp;q=<?php print $url_suffix; ?>&amp;iwloc=<?php print ($information_bubble ? 'A' : 'near'); ?>&amp;z=<?php print $zoom; ?>&amp;t=<?php print $map_type; ?>&amp;output=embed">
-      </iframe>
+        <iframe width="<?php print $width; ?>" height="<?php print $height; ?>" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?hl=<?php print $langcode; ?>&amp;q=<?php print $url_suffix; ?>&amp;z=<?php print $zoom; ?>&amp;t=<?php print $map_type; ?>&amp;output=embed"></iframe>
     <?php endif; ?>
 
     <?php if ($include_static_map):
-      $static_w = (int) $width;
-      $static_h = (int) $height;
+        $static_w = (int) $width;
+        $static_h = (int) $height;
+        $static_s = (int) $static_scale;
       ?>
 
-      <div class="simple-gmap-static-map">
-        <img
-          src="http://maps.googleapis.com/maps/api/staticmap?size=<?php print $static_w; ?>x<?php print $static_h; ?>&amp;zoom=<?php print $zoom; ?>&amp;language=<?php print $langcode; ?>&amp;maptype=<?php print $static_map_type; ?>&amp;markers=color:red|<?php print $url_suffix; ?>&amp;sensor=false"/>
-      </div>
+        <div class="simple-gmap-static-map">
+            <img src="https://maps.googleapis.com/maps/api/staticmap?size=<?php print $static_w; ?>x<?php print $static_h; ?>&amp;scale=<?php print $static_s; ?>&amp;zoom=<?php print $zoom; ?>&amp;language=<?php print $langcode; ?>&amp;maptype=<?php print $static_map_type; ?>&amp;markers=color:red|<?php print $url_suffix; ?>&amp;sensor=false&amp;key=<?php print $apikey; ?>" />
+        </div>
 
     <?php endif; ?>
 
     <div class="caption">
       <?php if ($include_link) : ?>
-        <p class="simple-gmap-link"><a
-            href="https://maps.google.com/maps?q=<?php print $url_suffix; ?>&amp;hl=<?php print $langcode; ?>&amp;iwloc=<?php print ($information_bubble ? 'A' : 'near'); ?>&amp;z=<?php print $zoom; ?>&amp;t=<?php print $map_type; ?>"
-            target="_blank"><?php print $link_text; ?></a></p>
+          <p class="simple-gmap-link"><a href="https://maps.google.com/maps?q=<?php print $url_suffix; ?>&amp;hl=<?php print $langcode; ?>&amp;z=<?php print $zoom; ?>&amp;t=<?php print $map_type; ?>" target="_blank"><?php print $link_text; ?></a></p>
       <?php endif; ?>
 
       <?php if (!empty($address_text)): ?>
-        <p class="simple-gmap-address"><?php print $address_text; ?></p>
+          <p class="simple-gmap-address"><?php print $address_text; ?></p>
       <?php endif; ?>
     </div>
   </div>
