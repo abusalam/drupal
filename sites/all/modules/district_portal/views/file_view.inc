@@ -3,7 +3,7 @@
 $view = new view();
 $view->name = 'file_view';
 $view->description = '';
-$view->tag = 'default';
+$view->tag = 'apps';
 $view->base_table = 'file_managed';
 $view->human_name = 'File view';
 $view->core = 7;

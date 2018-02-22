@@ -1,8 +1,9 @@
 <?php
+
 $view = new view();
 $view->name = 'google_maps';
 $view->description = '';
-$view->tag = 'default';
+$view->tag = 'portal';
 $view->base_table = 'node';
 $view->human_name = 'Google Maps';
 $view->core = 7;
@@ -29,17 +30,17 @@ $handler->display->display_options['fields']['field_google_maps_location']['labe
 $handler->display->display_options['fields']['field_google_maps_location']['element_label_colon'] = FALSE;
 $handler->display->display_options['fields']['field_google_maps_location']['type'] = 'simple_gmap';
 $handler->display->display_options['fields']['field_google_maps_location']['settings'] = array(
-  'include_map' => 1,
-  'include_static_map' => 0,
-  'iframe_width' => '220',
-  'iframe_height' => '220',
-  'include_link' => 1,
-  'link_text' => 'Navigate to this Place',
-  'zoom_level' => '14',
-  'information_bubble' => 1,
-  'include_text' => 0,
-  'map_type' => 'm',
-  'langcode' => 'en',
+'include_map' => 1,
+'include_static_map' => 0,
+'iframe_width' => '220',
+'iframe_height' => '220',
+'include_link' => 1,
+'link_text' => 'Navigate to this Place',
+'zoom_level' => '14',
+'information_bubble' => 1,
+'include_text' => 0,
+'map_type' => 'm',
+'langcode' => 'en',
 );
 /* Sort criterion: Content: Post date */
 $handler->display->display_options['sorts']['created']['id'] = 'created';
@@ -65,3 +66,16 @@ $handler->display->display_options['filters']['field_google_maps_location_value'
 /* Display: Block */
 $handler = $view->new_display('block', 'Block', 'block');
 $handler->display->display_options['block_description'] = 'Location on Google Maps';
+$translatables['google_maps'] = array(
+t('Master'),
+t('On Google Maps'),
+t('more'),
+t('Apply'),
+t('Reset'),
+t('Sort by'),
+t('Asc'),
+t('Desc'),
+t('All'),
+t('Block'),
+t('Location on Google Maps'),
+);

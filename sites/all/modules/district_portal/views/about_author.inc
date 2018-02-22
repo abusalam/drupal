@@ -1,8 +1,9 @@
 <?php
+
 $view = new view();
 $view->name = 'about_author';
 $view->description = '';
-$view->tag = 'default';
+$view->tag = 'portal';
 $view->base_table = 'node';
 $view->human_name = 'About Author';
 $view->core = 7;
