@@ -116,3 +116,29 @@ function webform_archive_get_all_webforms($status = 1) {
   }
   return $webforms;
 }
+
+/**
+ * Gives basic submission information required for report generation.
+ *
+ * @return array
+ *   Basic submission information required for report generation.
+ */
+function webform_archive_webform_basic_information_fields() {
+  $submission_information = &drupal_static(__FUNCTION__);
+  if (!isset($submission_information)) {
+    // Basic Submission information.
+    $submission_information = array(
+      'nid' => t('Title'),
+      'sid' => t('SID'),
+      'submitted' => t('Submission Time'),
+      'remote_addr' => t('IP Address'),
+      'uid' => t('UID'),
+    );
+    $webform_info = system_get_info('module', 'webform');
+    $version = $webform_info['version'];
+    if (version_compare($version, '7.x-4.0') == 1) {
+      $submission_information['serial'] = t('Serial');
+    }
+  }
+  return $submission_information;
+}

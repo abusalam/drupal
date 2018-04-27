@@ -45,104 +45,16 @@ function webform_archive_schema() {
   );
 
   // Archive webform submissions table. [Clone of webform_submission table]
-  $schema['archive_webform_submissions'] = array(
-    'description' => 'Holds general information about archive submissions outside of field values.',
-    'fields' => array(
-      'sid' => array(
-        'description' => 'The unique identifier for this archive submission.',
-        'type' => 'serial',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-      ),
-      'nid' => array(
-        'description' => 'The node identifier of an archive webform.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-      'uid' => array(
-        'description' => 'The id of the user that completed this archive submission.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-      'is_draft' => array(
-        'description' => 'Is this a draft of the archive submission?',
-        'type' => 'int',
-        'size' => 'tiny',
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-      'submitted' => array(
-        'description' => 'Timestamp of when the form was submitted.',
-        'type' => 'int',
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-      'remote_addr' => array(
-        'description' => 'The IP address of the user that submitted the form.',
-        'type' => 'varchar',
-        'length' => 128,
-      ),
-    ),
-    'primary key' => array('sid'),
-    'unique keys' => array(
-      'sid_nid' => array('sid', 'nid'),
-    ),
-    'indexes' => array(
-      'nid_uid_sid' => array('nid', 'uid', 'sid'),
-      'nid_sid' => array('nid', 'sid'),
-    ),
-  );
+  $webform_submission_schema = drupal_get_schema('webform_submissions');
+  unset($webform_submission_schema['module']);
+  unset($webform_submission_schema['name']);
+  $schema['archive_webform_submissions'] = $webform_submission_schema;
 
   // Archive webform submitted data. [Clone of webform_submitted_data table].
-  $schema['archive_webform_submitted_data'] = array(
-    'description' => 'All submitted field data for archive webform submissions.',
-    'fields' => array(
-      'nid' => array(
-        'description' => 'The node identifier of a webform.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-      'sid' => array(
-        'description' => 'The unique identifier for this archive submission.',
-        'type' => 'int',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-      'cid' => array(
-        'description' => 'The identifier for this component within this node, starts at 0 for each node.',
-        'type' => 'int',
-        'size' => 'small',
-        'unsigned' => TRUE,
-        'not null' => TRUE,
-        'default' => 0,
-      ),
-      'no' => array(
-        'description' => 'Usually this value is 0, but if a field has multiple values (such as a time or date), it may require multiple rows in the database.',
-        'type' => 'varchar',
-        'length' => 128,
-        'not null' => TRUE,
-        'default' => '0',
-      ),
-      'data' => array(
-        'description' => 'The submitted value of this field, may be serialized for some components.',
-        'type' => 'text',
-        'size' => 'medium',
-        'not null' => TRUE,
-      ),
-    ),
-    'primary key' => array('nid', 'sid', 'cid', 'no'),
-    'indexes' => array(
-      'nid' => array('nid'),
-      'sid_nid' => array('sid', 'nid'),
-    ),
-  );
+  $webform_submitted_data_schema = drupal_get_schema('webform_submitted_data');
+  unset($webform_submitted_data_schema['module']);
+  unset($webform_submitted_data_schema['name']);
+  $schema['archive_webform_submitted_data'] = $webform_submitted_data_schema;
   return $schema;
 }
 

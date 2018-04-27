@@ -210,7 +210,9 @@ function webform_archive_download_report_start($node, $options, &$context) {
     // Open the file for writing ('a' puts pointer at end of file).
     $handle = fopen($context['sandbox']['file_name'], 'a');
     foreach ($submissions as $sid => $submission) {
-      $data = $submission['submission'];
+      foreach ($header as $key => $value) {
+        $data[$key] = isset($submission['submission'][$key]) ? $submission['submission'][$key] : '';
+      }
       $data['nid'] = $node->title;
       $data['submitted'] = date('Y-m-d', $data['submitted']);
       fputcsv($handle, $data);
@@ -278,9 +280,11 @@ function webform_archive_download_batch_finished($success, $results, $operations
  *   Webform submission details.
  */
 function webform_archive_get_archive_submissions($nid, $options, $current_submission = 0, $limit = 10) {
+  $basic_submission_information = webform_archive_webform_basic_information_fields();
+  $basic_submission_information = array_keys($basic_submission_information);
   $archive_submission = array();
   $submissions = db_select('archive_webform_submissions', 'aws')
-  ->fields('aws', array('nid', 'sid', 'submitted', 'remote_addr'))
+  ->fields('aws', $basic_submission_information)
   ->condition('aws.nid', $nid)
   ->orderBy('aws.sid', 'ASC')
   ->condition('aws.submitted', $options['start_time'], '>');

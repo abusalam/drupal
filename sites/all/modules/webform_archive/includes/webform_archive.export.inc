@@ -22,13 +22,9 @@ function webform_archive_export_download($node, $options = NULL) {
     $file_url = file_create_url($file_path);
     drupal_goto($file_url);
   }
+
   // Basic Submission information.
-  $submission_information = array(
-    'nid' => t('Title'),
-    'sid' => t('SID'),
-    'submitted' => t('Submission Time'),
-    'remote_addr' => t('IP Address'),
-  );
+  $submission_information = webform_archive_webform_basic_information_fields();
   $options['file_name'] = $file_path;
   // Other components for the webform.
   $options['components'] = array_keys(webform_component_list($node, 'csv', TRUE));

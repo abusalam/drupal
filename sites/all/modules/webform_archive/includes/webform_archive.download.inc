@@ -149,6 +149,9 @@ function webform_archive_download_reports_form_submit($form, &$form_state) {
   $webform_node = $form_state['storage']['webform_node'];
   $show_count = $form_state['values']['webform_archive_show_count'];
   $start_time = $form_state['values']['webform_archive_report_start_time'];
+  if (is_array($start_time)) {
+    $start_time = $start_time['year'] . '-' . $start_time['month'] . '-' . $start_time['day'];
+  }
   $start_time = strtotime($start_time);
   $frequency = $form_state['values']['webform_archive_report_options'];
   switch ($frequency) {
