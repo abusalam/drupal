@@ -1,9 +1,9 @@
 # Ignore configuration files that may contain sensitive information.
 sites/*/settings*.php
+CHANGELOG.txt
 
 # Ignore paths that contain user-generated content.
 sites/*/files
-.idea/
-writereaddata/
-CHANGELOG.txt
-google61512d145cab304e.html
+sites/*/private
+writereaddata
+.idea
